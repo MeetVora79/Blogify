@@ -73,14 +73,6 @@ cd frontend
 npm install
 npm run dev
 
-📸 Screenshots
-<img width="953" alt="image" src="https://github.com/user-attachments/assets/f11201e5-0aed-4118-a7a8-86750f884445" />
-![image](https://github.com/user-attachments/assets/0333dcaa-6782-4818-88b7-7f34303434c0)
-![image](https://github.com/user-attachments/assets/6d814800-c14d-4613-97b7-a505ddb12a43)
-![image](https://github.com/user-attachments/assets/bbd07d55-317d-4e97-999d-56cbf82574db)
-
-
-
 
 🤝 Author
 Built with 💖 by Meet Vora
