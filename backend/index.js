@@ -29,6 +29,11 @@ app.use('/', (req, res) => {
 	res.send('Welcome to the Blogify API');	
 });
 
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // Replace with your actual Vercel domain
+  credentials: true,
+}));
+
 app.listen(PORT, () => {
 	console.log(`Server is running on http://localhost:${PORT}`);
 });

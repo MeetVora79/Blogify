@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export const api = axios.create({
-	baseURL: 'http://localhost:5000/api/blogs',
+	baseURL: 'https://blogify-gcdw.onrender.com/api/blogs',
 })
 
 export const authApi = axios.create({
-	baseURL: 'http://localhost:5000/api/auth'
+	baseURL: 'https://blogify-gcdw.onrender.com/api/auth'
 })
