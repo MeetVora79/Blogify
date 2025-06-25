@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { authApi } from "../api";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -40,9 +42,9 @@ export default function SignupPage() {
           <p className="text-xl font-medium mb-2">Join us today</p>
           <p className="text-sm text-gray-300">
             Already have an account?{" "}
-            <a href="/login" className="text-blue-400 hover:underline">
+            <Link to="/login" className="text-blue-400 hover:underline">
               Sign in
-            </a>
+            </Link>
           </p>
           <p className="text-xs text-gray-500 mt-10">
             © {new Date().getFullYear()} Blogify.com, All rights reserved
@@ -101,13 +103,13 @@ export default function SignupPage() {
 
             <p className="text-xs text-gray-500 text-center mt-2">
               By signing up, you agree to Blogify's{" "}
-              <a href="#" className="underline">
+              <Link to="#" className="underline">
                 Terms & Conditions
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="#" className="underline">
+              <Link to="#" className="underline">
                 Privacy Policy
-              </a>.
+              </Link>.
             </p>
           </form>
         </div>

@@ -14,6 +14,7 @@ const CreateBlog = () => {
 
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -25,6 +26,7 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true); 
 
     // Convert comma-separated tags string to array
     const blogData = {
@@ -40,6 +42,8 @@ const CreateBlog = () => {
     } catch (err) {
       setError('Failed to create blog. Please try again.', err.message);
       toast.error(err.response?.data?.message || "Failed to publish blog, please try again.");
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -90,7 +94,7 @@ const CreateBlog = () => {
           type="submit"
           className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
         >
-          Publish
+          {loading ? "Publishing..." : "Publish"} 
         </button>
       </form>
     </div>

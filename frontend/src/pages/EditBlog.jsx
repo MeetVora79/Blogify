@@ -12,8 +12,10 @@ const EditBlog = () => {
     tags: '',
     authorName: '',
   });
+
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     api.get(`/${id}`).then(res => {
@@ -38,6 +40,7 @@ const EditBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
     const updatedData = {
       ...formData,
       tags: formData.tags.split(',').map(tag => tag.trim()),
@@ -50,6 +53,8 @@ const EditBlog = () => {
     } catch (err) {
       setError('Failed to update blog.', err.message);
       toast.error(err.response?.data?.message || "Failed to save changes, please try again.");
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -97,7 +102,7 @@ const EditBlog = () => {
           required
         />
         <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-          Save Changes
+          {loading ? "Updating..." : "Save Changes"}
         </button>
       </form>
     </div>
