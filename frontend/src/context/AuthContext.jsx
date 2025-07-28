@@ -1,29 +1,30 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect  } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(() => {
-  try {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  } catch (e) {
-    console.error("Invalid JSON in user localStorage:", e);
-    return null;
-  }
-});
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [token, setToken] = useState(() => {
-  try {
-    return localStorage.getItem("token") || null;
-  } catch {
-    return null;
-  }
-  });
+   useEffect(() => {
+    try {
+      const storedUser = localStorage.getItem("user");
+      const storedToken = localStorage.getItem("token");
 
-
+      if (storedUser && storedToken) {
+        setUser(JSON.parse(storedUser));
+        setToken(storedToken);
+      }
+    } catch (e) {
+      console.error("Error parsing auth data:", e);
+    } finally {
+      setLoading(false); 
+    }
+  }, []);
+ 
   const login = (userData, token) => {
     setUser(userData);
     setToken(token);
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading  }}>
       {children}
     </AuthContext.Provider>
   );
