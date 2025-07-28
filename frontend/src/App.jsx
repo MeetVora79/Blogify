@@ -47,7 +47,7 @@ function App() {
         {!isAuthPage && <Navbar />}
         <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<Navigate to={token ? "/home" : "/login"} />} />
+            <Route path="/" element={token ? <Navigate to="/home" /> : <LoginPage />} />
             <Route path="/home" element={<PrivateRoute> <Home /> </PrivateRoute>} />
             <Route path="/login" element={token ? <Navigate to="/home" /> : <LoginPage />} />
             <Route path="/signup" element={token ? <Navigate to="/home" /> : <SignupPage />} />
