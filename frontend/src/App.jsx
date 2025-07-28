@@ -21,14 +21,16 @@ import "./App.css";
 function App() {
 
   // Access the user data from AuthContext
-  const { user, token } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   // Use useLocation to get the current location
   // This can be useful for conditional rendering or redirects based on the current path
   const location = useLocation();
 
   // Check if current route is auth-related like path as /api/auth/login or /api/auth/signup
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  const authPages = ["/login", "/signup"];
+  const isAuthPage = authPages.includes(location.pathname);
+
 
   return (
     <>
@@ -40,14 +42,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to={token ? "/home" : "/login"} />} />
             <Route path="/home" element={<PrivateRoute> <Home /> </PrivateRoute>} />
-            <Route path="/login" element={<LoginPage /> } />
-            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={token ? <Navigate to="/home" /> : <LoginPage />} />
+            <Route path="/signup" element={token ? <Navigate to="/home" /> : <SignupPage />} />
             <Route path="/create" element={<PrivateRoute> <CreateBlog /> </PrivateRoute>} />
             <Route path="/my-blogs" element={<PrivateRoute> <MyBlogs /> </PrivateRoute>} />
             <Route path="/edit/:id" element={<PrivateRoute> <EditBlog /> </PrivateRoute>} />
             <Route path="/blog/:id" element={<PrivateRoute> <ViewBlog /> </PrivateRoute>} />
             <Route path="/saved" element={<PrivateRoute> <SavedBlogs /> </PrivateRoute>} />
-            <Route path="*" element={<Navigate to={user ? "/home" : "/login"} />} />
+            <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
           </Routes>
         </div>
         {!isAuthPage && <Footer />}
