@@ -21,7 +21,7 @@ import "./App.css";
 function App() {
 
   // Access the user data from AuthContext
-  const { token } = useContext(AuthContext);
+  const { token, loading  } = useContext(AuthContext);
 
   // Use useLocation to get the current location
   // This can be useful for conditional rendering or redirects based on the current path
@@ -31,6 +31,13 @@ function App() {
   const authPages = ["/login", "/signup"];
   const isAuthPage = authPages.includes(location.pathname);
 
+  if (loading) {
+  return (
+    <div className="h-screen flex items-center justify-center">
+      <span className="text-lg font-semibold">Loading...</span>
+    </div>
+  );
+  }
 
   return (
     <>
