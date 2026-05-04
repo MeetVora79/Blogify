@@ -28,8 +28,7 @@ app.use('/', (req, res) => {
 });
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // Replace with your actual Vercel domain
-  credentials: true,
+  origin: "*", // Replace with your actual Vercel domain
 }));
 
 app.listen(PORT, () => {
