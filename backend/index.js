@@ -8,9 +8,17 @@ const authRoutes = require("./routes/auth");
 // Initialize Express app
 const app = express();
 
-app.use(cors({
-  origin: "*", // Replace with your actual Vercel domain
-}));
+const corsOptions = {
+  origin: "https://blogify-beta-two.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+// ✅ IMPORTANT: handle preflight manually
+app.options("*", cors(corsOptions));
 
 // Parse JSON bodies  
 app.use(express.json());
