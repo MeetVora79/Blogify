@@ -8,6 +8,10 @@ const authRoutes = require("./routes/auth");
 // Initialize Express app
 const app = express();
 
+app.use(cors({
+  origin: "*", // Replace with your actual Vercel domain
+}));
+
 // Parse JSON bodies  
 app.use(express.json());
 
@@ -26,10 +30,6 @@ app.use("/api/auth", authRoutes);
 app.use('/', (req, res) => {
 	res.send('Welcome to the Blogify API');	
 });
-
-app.use(cors({
-  origin: "*", // Replace with your actual Vercel domain
-}));
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://localhost:${PORT}`);
