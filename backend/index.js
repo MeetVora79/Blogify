@@ -8,11 +8,8 @@ const authRoutes = require("./routes/auth");
 // Initialize Express app
 const app = express();
 
-// ✅ CORS (only this is enough)
-app.use(cors({
-  origin: "https://blogify-beta-two.vercel.app",
-  credentials: true,
-}));
+// CORS middleware
+app.use(cors());
 
 // Parse JSON bodies  
 app.use(express.json());
@@ -32,6 +29,11 @@ app.use("/api/auth", authRoutes);
 app.use('/', (req, res) => {
 	res.send('Welcome to the Blogify API');	
 });
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+}));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
