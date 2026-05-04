@@ -8,8 +8,6 @@ const authRoutes = require("./routes/auth");
 // Initialize Express app
 const app = express();
 
-// Middleware setup
-app.use(cors());
 // Parse JSON bodies  
 app.use(express.json());
 
