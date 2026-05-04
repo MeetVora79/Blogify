@@ -8,17 +8,11 @@ const authRoutes = require("./routes/auth");
 // Initialize Express app
 const app = express();
 
-const corsOptions = {
+// ✅ CORS (only this is enough)
+app.use(cors({
   origin: "https://blogify-beta-two.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-// ✅ IMPORTANT: handle preflight manually
-app.options("*", cors(corsOptions));
+}));
 
 // Parse JSON bodies  
 app.use(express.json());
